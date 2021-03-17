@@ -29,5 +29,12 @@ namespace Dotnet_CRUD.Controllers
             return Ok(users.FirstOrDefault(user => user.Id==id));
         }
 
+        [HttpPost]
+        public IActionResult addUser(User newUser)
+        {
+            users.Add(newUser);
+            return Ok(users);
+        }
+
     }
 }
