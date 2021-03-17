@@ -14,5 +14,7 @@ namespace Dotnet_CRUD.Services.UserService
 
         List<User> AddUser(User newUser);
 
+        User UpdateUser(User updatedUser);
+
     }
 }

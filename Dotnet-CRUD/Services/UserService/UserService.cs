@@ -17,6 +17,8 @@ namespace Dotnet_CRUD.Services.UserService
 
         public List<User> AddUser(User newUser)
         {
+            User user = newUser;
+            user.Id = users.Max(user => user.Id) + 1;
             users.Add(newUser);
             return users;
         }
@@ -29,6 +31,23 @@ namespace Dotnet_CRUD.Services.UserService
         public User GetUserById(int id)
         {
             return users.FirstOrDefault(user => user.Id == id);
+        }
+
+        public User UpdateUser(User updatedUser)
+        {
+            User user = users.FirstOrDefault(user => user.Id == updatedUser.Id);
+            try
+            {
+                user.Name = updatedUser.Name;
+                user.LastName = updatedUser.LastName;
+                user.age = updatedUser.age;
+
+            }catch(Exception err)
+            {
+                throw err;
+            }
+
+            return user;
         }
     }
 }

@@ -40,5 +40,11 @@ namespace Dotnet_CRUD.Controllers
             return Ok(_userService.AddUser(newUser));
         }
 
+        [HttpPut]
+        public IActionResult updateUser(User updatedUser)
+        {
+            return Ok(_userService.UpdateUser(updatedUser));
+        }
+
     }
 }
