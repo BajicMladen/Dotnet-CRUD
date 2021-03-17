@@ -36,7 +36,7 @@ namespace Dotnet_CRUD
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+          //  app.UseHttpsRedirection();
 
             app.UseRouting();
 
