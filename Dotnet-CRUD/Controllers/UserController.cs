@@ -46,5 +46,12 @@ namespace Dotnet_CRUD.Controllers
             return Ok(_userService.UpdateUser(updatedUser));
         }
 
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            return Ok(_userService.DeleteUser(id));
+        }
+
     }
 }

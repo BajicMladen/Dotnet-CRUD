@@ -16,5 +16,7 @@ namespace Dotnet_CRUD.Services.UserService
 
         User UpdateUser(User updatedUser);
 
+        List<User> DeleteUser(int id);
+
     }
 }

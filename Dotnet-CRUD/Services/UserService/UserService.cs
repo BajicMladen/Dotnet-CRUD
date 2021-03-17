@@ -23,6 +23,20 @@ namespace Dotnet_CRUD.Services.UserService
             return users;
         }
 
+        public List<User> DeleteUser(int id)
+        {
+            try
+            {
+                User user = users.First(user => user.Id == id);
+                users.Remove(user);
+
+            }catch(Exception err)
+            {
+                throw err;
+            }
+            return users;
+        }
+
         public List<User> GetAllUsers()
         {
              return users;
