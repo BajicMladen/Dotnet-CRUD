@@ -1,4 +1,5 @@
 ﻿using Dotnet_CRUD.Models;
+using Dotnet_CRUD.Services.UserService;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,29 +12,32 @@ namespace Dotnet_CRUD.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private static List<User> users = new List<User>
+    
+
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
         {
-            new User{},
-            new User {Id=1,Name="Nikola",LastName="Nikolic", age=33}
-        };
+            _userService = userService;
+        }
 
         [HttpGet("GetAll")]
         public IActionResult Get()
         {
-            return Ok(users);
+            return Ok(_userService.GetAllUsers());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetSingle(int id)
         {
-            return Ok(users.FirstOrDefault(user => user.Id==id));
+            return Ok(_userService.GetUserById(id));
         }
 
         [HttpPost]
         public IActionResult addUser(User newUser)
         {
-            users.Add(newUser);
-            return Ok(users);
+            
+            return Ok(_userService.AddUser(newUser));
         }
 
     }
