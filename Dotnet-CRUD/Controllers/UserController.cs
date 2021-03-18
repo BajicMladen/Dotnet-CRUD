@@ -1,5 +1,6 @@
 ﻿using Dotnet_CRUD.Models;
 using Dotnet_CRUD.Services.UserService;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,6 +28,7 @@ namespace Dotnet_CRUD.Controllers
             _userService = userService;
         }
 
+        [EnableCors]
         [HttpGet]
         public IActionResult Get([FromQuery] string search)
         {
@@ -54,7 +56,7 @@ namespace Dotnet_CRUD.Controllers
             return Ok(_userService.UpdateUser(updatedUser));
         }
 
-
+        [EnableCors]
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
@@ -70,6 +72,12 @@ namespace Dotnet_CRUD.Controllers
 
             return Ok(_userService.PatchUser(id));
 
+        }
+
+        [HttpOptions]
+        public IActionResult Option()
+        {
+            return NoContent();
         }
 
 
