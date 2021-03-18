@@ -1,5 +1,6 @@
 ﻿using Dotnet_CRUD.Models;
 using Dotnet_CRUD.Services.UserService;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,12 @@ namespace Dotnet_CRUD.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-    
+
+        private static List<User> users = new List<User>
+        {
+            new User{},
+            new User {Id=1,Name="Nikola",LastName="Nikolic", age=33}
+        };
 
         private readonly IUserService _userService;
 
@@ -34,14 +40,14 @@ namespace Dotnet_CRUD.Controllers
         }
 
         [HttpPost]
-        public IActionResult addUser(User newUser)
+        public IActionResult AddUser(User newUser)
         {
             
             return Ok(_userService.AddUser(newUser));
         }
 
         [HttpPut]
-        public IActionResult updateUser(User updatedUser)
+        public IActionResult UpdateUser(User updatedUser)
         {
             return Ok(_userService.UpdateUser(updatedUser));
         }
@@ -52,6 +58,18 @@ namespace Dotnet_CRUD.Controllers
         {
             return Ok(_userService.DeleteUser(id));
         }
+
+
+        [HttpPatch("{id:int}")]
+        public IActionResult PatchUser(int id, [FromBody] JsonPatchDocument<User> patchDoc)
+        {                   
+           
+            patchDoc.ApplyTo(_userService.PatchUser(id), ModelState);
+
+            return Ok(_userService.PatchUser(id));
+
+        }
+
 
     }
 }

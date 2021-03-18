@@ -1,4 +1,5 @@
 ﻿using Dotnet_CRUD.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,11 @@ namespace Dotnet_CRUD.Services.UserService
         public User GetUserById(int id)
         {
             return users.FirstOrDefault(user => user.Id == id);
+        }
+
+        public User PatchUser(int id, JsonPatchDocument<User> patchDoc)
+        {
+          return users.FirstOrDefault(user => user.Id == id);         
         }
 
         public User UpdateUser(User updatedUser)
