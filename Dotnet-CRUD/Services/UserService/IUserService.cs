@@ -9,17 +9,17 @@ namespace Dotnet_CRUD.Services.UserService
 {
    public interface IUserService
     {
-        List<User> GetAllUsers(string name);
+        Task<List<User>> GetAllUsers(string name);
 
-        User GetUserById(int id);
+        Task<User> GetUserById(int id);
 
-        List<User> AddUser(User newUser);
+        Task<List<User>> AddUser(User newUser);
 
-        User UpdateUser(User updatedUser);
+        Task<User> UpdateUser(User updatedUser);
 
-        List<User> DeleteUser(int id);
+        Task<List<User>> DeleteUser(int id);
 
-        User PatchUser(int id);
+        Task<User> PatchUser(int id);
 
 
 

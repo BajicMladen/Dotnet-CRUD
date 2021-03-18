@@ -15,11 +15,7 @@ namespace Dotnet_CRUD.Controllers
     public class UserController : ControllerBase
     {
 
-        private static List<User> users = new List<User>
-        {
-            new User{},
-            new User {Id=1,Name="Nikola",LastName="Nikolic", age=33}
-        };
+    
 
         private readonly IUserService _userService;
 
@@ -30,52 +26,52 @@ namespace Dotnet_CRUD.Controllers
 
         [EnableCors]
         [HttpGet]
-        public IActionResult Get([FromQuery] string search)
+        public async Task<IActionResult> Get([FromQuery] string search)
         {
-            return Ok(_userService.GetAllUsers(search));
+            return Ok(await _userService.GetAllUsers(search));
         }
 
 
 
         [HttpGet("{id}")]
-        public IActionResult GetSingle(int id)
+        public async Task<IActionResult> GetSingle(int id)
         {
-            return Ok(_userService.GetUserById(id));
+            return Ok(await _userService.GetUserById(id));
         }
 
         [HttpPost]
-        public IActionResult AddUser(User newUser)
+        public async Task<IActionResult> AddUser(User newUser)
         {
             
-            return Ok(_userService.AddUser(newUser));
+            return Ok(await _userService.AddUser(newUser));
         }
 
         [HttpPut]
-        public IActionResult UpdateUser(User updatedUser)
+        public async Task<IActionResult> UpdateUser(User updatedUser)
         {
-            return Ok(_userService.UpdateUser(updatedUser));
+            return Ok(await _userService.UpdateUser(updatedUser));
         }
 
         [EnableCors]
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            return Ok(_userService.DeleteUser(id));
+            return Ok( await _userService.DeleteUser(id));
         }
 
 
         [HttpPatch("{id:int}")]
-        public IActionResult PatchUser(int id, [FromBody] JsonPatchDocument<User> patchDoc)
+        public async Task<IActionResult> PatchUser(int id, [FromBody] JsonPatchDocument<User> patchDoc)
         {                   
            
-            patchDoc.ApplyTo(_userService.PatchUser(id), ModelState);
+           patchDoc.ApplyTo( await _userService.PatchUser(id), ModelState);
 
-            return Ok(_userService.PatchUser(id));
+            return Ok(await _userService.PatchUser(id));
 
         }
 
         [HttpOptions]
-        public IActionResult Option()
+        public async Task<IActionResult> Option()
         {
             return NoContent();
         }

@@ -13,11 +13,11 @@ namespace Dotnet_CRUD.Services.UserService
         private static List<User> users = new List<User>
         {
             new User{},
-            new User {Id=1,Name="Nikola",LastName="Nikolic", age=33},
+            new User{Id=1,Name="Nikola",LastName="Nikolic", age=33},
             new User{Id=2, Name="Jovan", LastName="Mladic", age=29}
         };
 
-        public List<User> AddUser(User newUser)
+        public async Task<List<User>> AddUser(User newUser)
         {
             User user = newUser;
             user.Id = users.Max(user => user.Id) + 1;
@@ -25,7 +25,7 @@ namespace Dotnet_CRUD.Services.UserService
             return users;
         }
 
-        public List<User> DeleteUser(int id)
+        public async Task<List<User>> DeleteUser(int id)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Dotnet_CRUD.Services.UserService
             return users;
         }
 
-        public List<User> GetAllUsers(string search)
+        public async Task<List<User>> GetAllUsers(string search)
         {
             var quaryable = users.AsQueryable();
 
@@ -53,20 +53,20 @@ namespace Dotnet_CRUD.Services.UserService
         }
 
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
             return users.FirstOrDefault(user => user.Id == id);
         }
 
 
-        public User PatchUser(int id)
+        public async Task<User> PatchUser(int id)
         {
-            throw new NotImplementedException();
+            return users.FirstOrDefault(user => user.Id == id);
         }
 
 
 
-        public User UpdateUser(User updatedUser)
+        public async Task<User> UpdateUser(User updatedUser)
         {
             User user = users.FirstOrDefault(user => user.Id == updatedUser.Id);
             try
