@@ -1,4 +1,5 @@
-﻿using Dotnet_CRUD.Models;
+﻿using Dotnet_CRUD.Dtos.User;
+using Dotnet_CRUD.Models;
 using Dotnet_CRUD.Services.UserService;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.JsonPatch;
@@ -24,6 +25,7 @@ namespace Dotnet_CRUD.Controllers
             _userService = userService;
         }
 
+
         [EnableCors]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] string search)
@@ -40,14 +42,14 @@ namespace Dotnet_CRUD.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUser(User newUser)
+        public async Task<IActionResult> AddUser(AddUserDto newUser)
         {
             
             return Ok(await _userService.AddUser(newUser));
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(User updatedUser)
+        public async Task<IActionResult> UpdateUser(UpdateUserDto updatedUser)
         {
             return Ok(await _userService.UpdateUser(updatedUser));
         }
@@ -64,9 +66,9 @@ namespace Dotnet_CRUD.Controllers
         public async Task<IActionResult> PatchUser(int id, [FromBody] JsonPatchDocument<User> patchDoc)
         {                   
            
-           patchDoc.ApplyTo( await _userService.PatchUser(id), ModelState);
+           patchDoc.ApplyTo(await _userService.PatchUser(id), ModelState);
 
-            return Ok(await _userService.PatchUser(id));
+           return Ok(await _userService.GetUserById(id));
 
         }
 

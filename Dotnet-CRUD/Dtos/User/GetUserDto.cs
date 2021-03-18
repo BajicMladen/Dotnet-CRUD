@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Dotnet_CRUD.Models
+namespace Dotnet_CRUD.Dtos.User
 {
-    public class User
+    public class GetUserDto
     {
 
         public int Id { get; set; }
@@ -16,6 +16,5 @@ namespace Dotnet_CRUD.Models
 
         public int Age { get; set; } = 21;
 
-       
     }
 }

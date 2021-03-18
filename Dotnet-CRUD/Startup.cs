@@ -48,6 +48,7 @@ namespace Dotnet_CRUD
 
             services.AddControllers().AddNewtonsoftJson();
             services.AddScoped<IUserService, UserService>();
+            services.AddAutoMapper(typeof(Startup));
             
         }
 
