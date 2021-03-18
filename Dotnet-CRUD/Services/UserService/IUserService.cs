@@ -9,7 +9,7 @@ namespace Dotnet_CRUD.Services.UserService
 {
    public interface IUserService
     {
-        List<User> GetAllUsers();
+        List<User> GetAllUsers(string name);
 
         User GetUserById(int id);
 
@@ -20,6 +20,8 @@ namespace Dotnet_CRUD.Services.UserService
         List<User> DeleteUser(int id);
 
         User PatchUser(int id);
+
+
 
     }
 }

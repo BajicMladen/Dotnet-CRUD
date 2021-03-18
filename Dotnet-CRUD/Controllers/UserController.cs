@@ -27,11 +27,13 @@ namespace Dotnet_CRUD.Controllers
             _userService = userService;
         }
 
-        [HttpGet("GetAll")]
-        public IActionResult Get()
+        [HttpGet]
+        public IActionResult Get([FromQuery] string search)
         {
-            return Ok(_userService.GetAllUsers());
+            return Ok(_userService.GetAllUsers(search));
         }
+
+
 
         [HttpGet("{id}")]
         public IActionResult GetSingle(int id)

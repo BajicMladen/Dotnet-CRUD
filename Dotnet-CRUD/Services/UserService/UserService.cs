@@ -13,7 +13,8 @@ namespace Dotnet_CRUD.Services.UserService
         private static List<User> users = new List<User>
         {
             new User{},
-            new User {Id=1,Name="Nikola",LastName="Nikolic", age=33}
+            new User {Id=1,Name="Nikola",LastName="Nikolic", age=33},
+            new User{Id=2, Name="Jovan", LastName="Mladic", age=29}
         };
 
         public List<User> AddUser(User newUser)
@@ -38,20 +39,32 @@ namespace Dotnet_CRUD.Services.UserService
             return users;
         }
 
-        public List<User> GetAllUsers()
+        public List<User> GetAllUsers(string search)
         {
+            var quaryable = users.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                quaryable = quaryable.Where(user => user.Name.Contains(search) || user.LastName.Contains(search));
+                return quaryable.ToList();
+            }
+
              return users;
         }
+
 
         public User GetUserById(int id)
         {
             return users.FirstOrDefault(user => user.Id == id);
         }
 
-        public User PatchUser(int id, JsonPatchDocument<User> patchDoc)
+
+        public User PatchUser(int id)
         {
-          return users.FirstOrDefault(user => user.Id == id);         
+            throw new NotImplementedException();
         }
+
+
 
         public User UpdateUser(User updatedUser)
         {
